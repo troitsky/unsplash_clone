@@ -6,6 +6,16 @@ async function getImageLinks(req, res, next) {
     res.send(URLs)
   }
 
+async function findImage(req, res, next) {
+    const searchText = req.params.label;
+    try {
+        const image = await UploadPhoto.find({label: searchText})
+        res.send(image)
+    } catch(err) {
+        console.log("Error occured while searching for single image: ", err)
+    }
+}
+
 
 function saveImageInfo(req, res, next) {
     console.log('uploading')
@@ -43,4 +53,4 @@ function checkPassword(req, res, next) {
     }
 }
 
-module.exports = {saveImageInfo, getImageLinks, deleteImageInfo, checkPassword}
+module.exports = {saveImageInfo, getImageLinks, deleteImageInfo, checkPassword, findImage}
