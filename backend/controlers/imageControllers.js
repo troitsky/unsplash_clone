@@ -19,7 +19,7 @@ async function findImage(req, res, next) {
 
 function saveImageInfo(req, res, next) {
     console.log('uploading')
-    console.log(req.body)
+    console.log('req body: ', req.body)
     const photo = new UploadPhoto({
         label: req.body.label,
         url: req.body.url
@@ -29,7 +29,6 @@ function saveImageInfo(req, res, next) {
     .then(res => console.log(res))
     .catch(err => console.log('Error saving image: ', err))
 
-    res.redirect('/')
 }
 
 function deleteImageInfo(req, res, next) {

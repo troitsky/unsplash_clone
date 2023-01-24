@@ -18,7 +18,8 @@ async function main() {
 main().then(() => console.log("Database connected!")).catch(err => console.log(err));
 
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.use(express.static('uploads'))
 
 app.use('/', imageRouter)

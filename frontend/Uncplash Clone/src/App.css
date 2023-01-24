@@ -206,6 +206,10 @@
   gap: 25px;
 }
 
+.btn {
+  cursor: pointer;
+}
+
 .btn_form_cancel {
   font-size: 16px;
   line-height: 22px;
