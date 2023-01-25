@@ -27,10 +27,6 @@ export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVis
             console.log('all fields must be not empty')
             return
         }
-        const formData = new FormData();
-        formData.append("label", "test_label8");
-        formData.append("url", "test_url8");
-        // console.log(JSON.stringify(formData) )
 
         try {
             let res = await fetch('http://localhost:3000/upload', { 

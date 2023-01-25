@@ -1,13 +1,27 @@
 import { useState, useEffect } from 'react'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import NewPhotoForm from './components/NewPhotoForm'
-
+import PhotoCard from './components/PhotoCard'
 import './App.css'
 
 function App() {
-
   const [NewPhotoFormVisibility, setNewPhotoFormVisibility] = useState(false);
+  const [imageData, setImageData] = useState([]);
+  /* add image data update */
 
+  async function getImages() {
+    try {
+      await fetch('http://localhost:3000/')
+      .then(res => res.json())
+      .then(data => setImageData(data))
+    } catch(err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    getImages()
+  }, [NewPhotoFormVisibility])
 
   return (
     <div className="App">
@@ -21,51 +35,18 @@ function App() {
         </div>
         <div className="btn_add_photo" onClick={(e) => {e.stopPropagation(); setNewPhotoFormVisibility(true)}}>Add a photo</div>
       </div>
-
       <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 950: 2, 1350: 3}}>
         <Masonry className='masonry_grid' gutter='45px'>
-            <div className="image_card">
-              <img src="/marten-bjork-6dW3xyQvcYE-unsplash.jpg" alt="" className='image_card_picture' />
-              <div className="image_card_overlay">
-                <button className='btn-card-red'>delete</button>
-                <p className="image_card_title">Morbi consequat lectus non orci maximus</p>
-              </div>
-            </div>
-            <div className="image_card image_card_tall">
-              <img src="/robin-kutesa-xw_X5oAQ_nI-unsplash.jpg" alt="" className='image_card_picture' />
-              <div className="image_card_overlay">
-                <button className='btn-card-red'>delete</button>
-                <p className="image_card_title">Morbi consequat lectus non orci maximus</p>
-              </div>
-            </div>
-            <div className="image_card">
-              <img src="/marten-bjork-6dW3xyQvcYE-unsplash.jpg" alt="" className='image_card_picture' />
-              <div className="image_card_overlay">
-                <button className='btn-card-red'>delete</button>
-                <p className="image_card_title">Morbi consequat lectus non orci maximus</p>
-              </div>
-            </div>
-            <div className="image_card">
-              <img src="/marten-bjork-6dW3xyQvcYE-unsplash.jpg" alt="" className='image_card_picture' />
-              <div className="image_card_overlay">
-                <button className='btn-card-red'>delete</button>
-                <p className="image_card_title">Morbi consequat lectus non orci maximus</p>
-              </div>
-            </div>
-            <div className="image_card">
-              <img src="/marten-bjork-6dW3xyQvcYE-unsplash.jpg" alt="" className='image_card_picture' />
-              <div className="image_card_overlay">
-                <button className='btn-card-red'>delete</button>
-                <p className="image_card_title">Morbi consequat lectus non orci maximus</p>
-              </div>
-            </div>
-            <div className="image_card image_card_tall">
-              <img src="/robin-kutesa-xw_X5oAQ_nI-unsplash.jpg" alt="" className='image_card_picture' />
-              <div className="image_card_overlay">
-                <button className='btn-card-red'>delete</button>
-                <p className="image_card_title">Morbi consequat lectus non orci maximus</p>
-              </div>
-            </div>
+          {imageData.map( (img, i) => {
+            return (
+              <PhotoCard 
+                key={img._id}
+                id={img._id} 
+                url={img.url} 
+                label={img.label}
+              />
+            )
+          })}
         </Masonry>
       </ResponsiveMasonry>
       

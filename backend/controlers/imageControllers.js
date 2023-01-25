@@ -1,9 +1,20 @@
 const UploadPhoto = require('../models/uploadPhotoSchema')
 
-async function getImageLinks(req, res, next) {
+async function getImages(req, res, next) {
     const images = await UploadPhoto.find()
-    const URLs = images.map(img => img.url)
-    res.send(URLs)
+
+    const imageArray = images.map(img => { 
+        return (
+            { 
+                url: img.url,
+                label: img.label 
+            }
+        )
+        
+
+    })
+    // console.log("Image Array: ", imageArray)
+    res.send(images)
   }
 
 async function findImage(req, res, next) {
@@ -33,10 +44,10 @@ function saveImageInfo(req, res, next) {
 function deleteImageInfo(req, res, next) {
     UploadPhoto.findOneAndDelete({_id: req.params.id}, (err, deleted) => {
         if (err) {console.log(err)}
-        else {console.log("Deleted image: ", deleted)}
+        else {
+            res.status(200).send(deleted)   
+        }
     })
-
-    res.redirect('/')
 }
 
 function checkPassword(req, res, next) {
@@ -51,4 +62,4 @@ function checkPassword(req, res, next) {
     }
 }
 
-module.exports = {saveImageInfo, getImageLinks, deleteImageInfo, checkPassword, findImage}
+module.exports = {saveImageInfo, getImages, deleteImageInfo, checkPassword, findImage}
