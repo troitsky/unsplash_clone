@@ -2,7 +2,6 @@ const express = require('express')
 const mongoose = require('mongoose');
 const cors = require('cors')
 const path = require('path')
-const bodyParser = require('body-parser');
 
 
 const app = express()
@@ -18,8 +17,8 @@ async function main() {
 main().then(() => console.log("Database connected!")).catch(err => console.log(err));
 
 app.use(cors())
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
 app.use(express.static('uploads'))
 
 app.use('/', imageRouter)

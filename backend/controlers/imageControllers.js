@@ -26,9 +26,8 @@ function saveImageInfo(req, res, next) {
     })
 
     photo.save()
-    .then(res => console.log(res))
+    .then(res.status(200).send('image downloaded'))
     .catch(err => console.log('Error saving image: ', err))
-
 }
 
 function deleteImageInfo(req, res, next) {

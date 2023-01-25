@@ -23,11 +23,14 @@ export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVis
 
     const  handleSubmit = async (e) => {
         e.preventDefault();
-        // if (photoLabel === '' || photoURL === '') return
+        if (photoLabel === '' || photoURL === '') {
+            console.log('all fields must be not empty')
+            return
+        }
         const formData = new FormData();
         formData.append("label", "test_label8");
         formData.append("url", "test_url8");
-        console.log(JSON.stringify(formData) )
+        // console.log(JSON.stringify(formData) )
 
         try {
             let res = await fetch('http://localhost:3000/upload', { 
@@ -35,8 +38,8 @@ export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVis
                 method: 'POST',
                 // body: formData
                 body: JSON.stringify({
-                    label: "test_label88",
-                    url: "test_url88"
+                    label: photoLabel,
+                    url: photoURL
                 })
             })
             
@@ -45,13 +48,14 @@ export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVis
             if (res.status === 200) {
                 setPhotoLabel('');
                 setPhotoURL('');
+                setNewPhotoFormVisibility(false);
             } else  {
                 console.log('error while uploading data')
             }
         }
 
         catch (error) {
-            console.log(error)
+            console.log("Error while adding new photo: ",error)
         }
 
     }

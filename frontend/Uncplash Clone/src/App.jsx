@@ -70,7 +70,10 @@ function App() {
       </ResponsiveMasonry>
       
 
-      <NewPhotoForm NewPhotoFormVisibility={NewPhotoFormVisibility} setNewPhotoFormVisibility={setNewPhotoFormVisibility} />
+      <NewPhotoForm 
+        NewPhotoFormVisibility={NewPhotoFormVisibility} 
+        setNewPhotoFormVisibility={setNewPhotoFormVisibility} 
+      />
         
       {/* <div className="modal_bg">
         <div id='modalConfirmDelete' className="modalContent">

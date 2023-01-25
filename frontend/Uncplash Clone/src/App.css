@@ -196,8 +196,12 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 19px;
-  color: #BDBDBD;
+  color: black;
   margin-bottom: 19px;
+}
+
+input[value=""] {
+  color: #BDBDBD;
 }
 
 .form_buttons {
