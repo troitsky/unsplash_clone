@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 
-export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVisibility}) {
+export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVisibility, setPendingGalleryUpdate}) {
     const modalRef = useRef(null)
     const [photoLabel, setPhotoLabel] = useState('')
     const [photoURL, setPhotoURL] = useState('')
@@ -45,6 +45,7 @@ export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVis
                 setPhotoLabel('');
                 setPhotoURL('');
                 setNewPhotoFormVisibility(false);
+                setPendingGalleryUpdate(true)
             } else  {
                 console.log('error while uploading data')
             }

@@ -9,6 +9,6 @@ router.get('/find/:label', findImage)
 
 router.post('/upload', saveImageInfo)
 
-router.delete('/:id', deleteImageInfo)
+router.delete('/:id', checkPassword, deleteImageInfo)
 
 module.exports = router
