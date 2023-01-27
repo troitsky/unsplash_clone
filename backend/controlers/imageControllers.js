@@ -58,7 +58,7 @@ function checkPassword(req, res, next) {
         next()
     } else {
         console.log('password not ok')
-        res.send("password not ok")
+        res.status(403).send("password not ok")
     }
 }
 

@@ -246,6 +246,12 @@ input[value=""] {
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
  }
 
+ .password_hint {
+  font-size: 14px;
+  line-height: 19px;
+  color: #4F4F4F;
+ }
+
  @media (max-width: 1350px) {
   .App {
     padding: 35px 50px;

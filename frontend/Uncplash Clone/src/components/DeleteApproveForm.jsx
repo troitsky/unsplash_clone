@@ -9,20 +9,37 @@ export default function DeleteApproveForm({
     }) {
     const modalRef = useRef(null)
     const [password, setPassword] = useState('')
+    const [passwordHint, setPasswordHint] = useState('Type "password" to delete')
 
 
     /* Добавить возврат ошибки и не закрывать форму, если пароль неверный */
-    function deleteImage() {
+    async function deleteImage() {
         try {
-          fetch(`http://localhost:3000/${selectedCardId}?password=${password}`, {method: 'DELETE'})
-          .then(setPendingGalleryUpdate(true))
-          .then(setSelectedCardId(''))
-          .then(setDeleteApproveFormVisibility(false))
+          let res = await fetch(`http://localhost:3000/${selectedCardId}?password=${password}`, {method: 'DELETE'})
+          if (res.ok) {
+            console.log('received ok response')
+            setPendingGalleryUpdate(true)
+            setSelectedCardId('')
+            setDeleteApproveFormVisibility(false)
+            setPassword('')
+            setPasswordHint('Type "password" to delete')
+          } else {
+            setPassword('')
+            setPasswordHint('Wrong password. Try "password"')
+            console.log('password wrong')
+          }
+
         } catch(err) {
           console.log(err)
         }
-      }
+    }
 
+    function closeApproveDeleteForm() {
+        setPassword('')
+        setPasswordHint('Type "password" to delete')
+        setSelectedCardId(''); 
+        setDeleteApproveFormVisibility(false)
+    }
 
     useEffect(() => {
         function handleClickOutside(e) {
@@ -41,13 +58,7 @@ export default function DeleteApproveForm({
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (password === '') {
-            console.log('all fields must be not empty')
-            return
-        }
-
         deleteImage()
-
 
     }
 
@@ -59,8 +70,9 @@ export default function DeleteApproveForm({
                 <form action="" method="post" onSubmit={handleSubmit}>
                     <label htmlFor="password"  className='form_label'>Password</label>
                     <input id="password" type="password" className='form_text_input' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <p className="password_hint">{passwordHint}</p>
                     <div className="form_buttons">
-                        <button className='btn btn_form_cancel'>Cancel</button>
+                        <button className='btn btn_form_cancel' onClick={closeApproveDeleteForm}>Cancel</button>
                         <button className='btn btn_form_delete' type="submit">Delete</button>
                     </div>
                 </form>
