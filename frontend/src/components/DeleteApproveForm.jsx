@@ -14,7 +14,7 @@ export default function DeleteApproveForm({
 
     async function deleteImage() {
         try {
-          let res = await fetch(`http://localhost:3000/${selectedCardId}?password=${password}`, {method: 'DELETE'})
+          let res = await fetch(`${import.meta.env.VITE_SERVER}/${selectedCardId}?password=${password}`, {method: 'DELETE'})
           if (res.ok) {
             console.log('received ok response')
             setPendingGalleryUpdate(true)

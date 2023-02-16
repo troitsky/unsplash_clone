@@ -16,7 +16,7 @@ function App() {
 
   async function getImages() {
     try {
-      await fetch('http://localhost:3000/')
+      await fetch(import.meta.env.VITE_SERVER)
       .then(res => res.json())
       .then(data => setImageData(data))
     } catch(err) {
@@ -24,6 +24,7 @@ function App() {
     }
   }
 
+  
   useEffect(() => {
     getImages()
     if (pendingGalleryUpdate === true) setPendingGalleryUpdate(false)

@@ -29,7 +29,7 @@ export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVis
         }
 
         try {
-            let res = await fetch('http://localhost:3000/upload', { 
+            let res = await fetch(`${import.meta.env.VITE_SERVER}/upload`, { 
                 headers: {'Content-Type': 'application/json'},
                 method: 'POST',
                 // body: formData
