@@ -68,7 +68,7 @@ export default function NewPhotoForm({NewPhotoFormVisibility, setNewPhotoFormVis
                     <input id="photo_url" type="text" className='form_text_input' value={photoURL} onChange={(e) => setPhotoURL(e.target.value)} placeholder='https://images.unsplash.com/photo-1584...'/>
                     <div className="form_buttons">
                         <button className='btn btn_form_cancel'>Cancel</button>
-                        <button className='btn btn_form_submit'  type="submit">Submit</button>
+                        <button className='btn btn_form_submit' onSubmit={() => setNewPhotoFormVisibility(false)}  type="submit">Submit</button>
                     </div>
                 </form>
             </div>

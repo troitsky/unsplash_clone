@@ -12,7 +12,6 @@ export default function DeleteApproveForm({
     const [passwordHint, setPasswordHint] = useState('Type "password" to delete')
 
 
-    /* Добавить возврат ошибки и не закрывать форму, если пароль неверный */
     async function deleteImage() {
         try {
           let res = await fetch(`http://localhost:3000/${selectedCardId}?password=${password}`, {method: 'DELETE'})
