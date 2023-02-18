@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const cors = require('cors')
 const path = require('path')
 require('dotenv').config()
-console.log(process.env)
 
 
 const app = express()
@@ -12,7 +11,10 @@ const imageRouter = require('./routers/imageRouter')
 
 async function main() {
   mongoose.set('strictQuery', true);
-  await mongoose.connect(process.env.DB_URL) 
+  await mongoose.connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }) 
   // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
 }
 
